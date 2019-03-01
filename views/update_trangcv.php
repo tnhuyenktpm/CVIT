@@ -1,0 +1,350 @@
+<?php 
+include '../models/connect.php';
+$id_tv=$_GET['id_tv'];
+ ?>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>CVIT</title>
+
+	<!-- font -->
+	<link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&amp;subset=vietnamese" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,400i,700,700i&amp;subset=vietnamese" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	
+	<!-- Bootstrap -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+	<link rel="stylesheet" href="../assets/css/style.css">
+</head> <!-- end head -->
+<body>
+	<div class="fix-phai">
+		<a href="#" class="btn len-tren"><i class="fa fa-chevron-up"></i></a>
+		<!-- <a href="" class="btn xuong-duoi"><i class="fa fa-chevron-down"></i></a> -->
+	</div>
+	<div class="container-fluid phan-1">
+		<div class="update-anhbia">
+			<form>
+				<div class="form-group">
+					<label for="exampleFormControlFile1"><i class="fa fa-camera"></i> Cập nhật ảnh bìa</label>
+					<input type="file" class="form-control-file" id="exampleFormControlFile1">
+				</div>
+			</form>
+		</div> <!-- end update-anhbia -->
+		<img src="../assets/img/3.jpg" alt="" class="layer-1">
+		<div class="layer-2"></div>
+		<div class="layer-3">
+			<?php
+			$query = "select * from user,tt_thanh_vien,chuyen_nganh where tt_thanh_vien.id_user=user.id_user and tt_thanh_vien.id_chuyen_nganh=chuyen_nganh.id_chuyen_nganh and id_tv='$id_tv' ";
+					$result = mysqli_query($connect,$query);
+					foreach ($result as  $document) {
+
+				?>
+				<i class="fa fa-graduation-cap" style="font-size:80px;"></i>
+				<h2><input type="text" value="<?php echo $document['ho_ten']; ?>"> </h2>
+				<h1><input type="text" value="<?php echo $document['ten_chuyen_nganh']; ?>"></h1>
+				<p><textarea name=""><?php echo $document['mo_ta_ngan']; ?></textarea></p>
+				
+				<?php 
+			}
+			?>
+		</div>
+	</div> <!-- hết phan-1 -->
+	<div class="phan-2">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 tieu-de">
+					<h2>Giới thiệu về tôi</h2>
+				</div>
+				<div class="col-md-5 anh">
+					<div class="khung-anh">
+						<div class="update-anhbia update-avatar">
+							<form>
+								<div class="form-group">
+									<label for="exampleFormControlFile1"><i class="fa fa-camera"></i> Cập nhật ảnh đại diện</label>
+									<input type="file" class="form-control-file" id="exampleFormControlFile1">
+								</div>
+							</form>
+						</div> <!-- end update-avatar -->
+						<?php
+						$query = "select * from user,tt_thanh_vien,chuyen_nganh where tt_thanh_vien.id_user=user.id_user and id_tv='$id_tv' ";
+						$result = mysqli_query($connect,$query);
+						foreach ($result as $document) {
+							?>
+							<img src="<?php echo $document['hinh_anh'];?>" alt="">
+						<?php }
+						?>
+					</div>
+					
+				</div>
+				<div class="col-md-7 content">
+					<?php
+					$query = "select * from tt_thanh_vien, tinh_thanh, user
+					where tt_thanh_vien.id_tinh=tinh_thanh.id_tinh
+					and tt_thanh_vien.id_user=user.id_user
+					and id_tv='$id_tv' ";
+					$result = mysqli_query($connect,$query);
+					foreach ($result as $document) {
+						?>
+						<p><span>Họ và tên:</span><small class="ho-ten"><input type="text" value="<?php echo $document['ho_ten']; ?>"></small></p>
+						<p><span>Ngày sinh:</span><input type="text" value="<?php echo $document['ngay_sinh']; ?>"></p>
+						<p><span>Giới tính:</span><input type="text" value="<?php echo $document['gioi_tinh']; ?>"></p>
+						<p><span>Địa chỉ:</span><input type="text" value="<?php echo $document['ten_tinh']; ?>"></p>
+						<p><span>Quốc tịch:</span><input type="text" value="<?php echo $document['quoc_tich']; ?>"></p>
+						<p><span>Phone:	</span><input type="text" value="<?php echo $document['phone']; ?>"></p>
+						<p><span>Email:</span><input type="text" value="<?php echo $document['email']; ?>"></p>
+						<p><span>Website:</span><input type="text" value="<?php echo $document['website']; ?>"></p>
+						<?php 
+					}
+					?>
+				</div>
+			</div>
+		</div>
+	</div> <!-- hết phan-2 -->
+	<div id="particles-js" class="phan-3">
+		<div class="container noflow">
+			<div class="row">
+				<div class="col-md-6">
+					<div class="card hoc-van">
+						<div class="card-header ">
+							Trình độ học vấn
+						</div>
+						
+						<div class="card-body">
+							<?php
+							$query = "select * from tt_thanh_vien,hoc_van where tt_thanh_vien.id_tv=hoc_van.id_tv and tt_thanh_vien.id_tv='$id_tv' ";
+							$result = mysqli_query($connect,$query);
+							foreach ($result as $document) {
+								?>
+								<div class="mot-field">
+									<div class="nam"><input type="text" value="<?php echo $document['time']; ?>"></div>
+									<div class="noidung">
+										<p><h6 class="td"><input type="text" value="<?php echo $document['noi_hoc']; ?>"></h6></p>
+										<p><textarea><?php echo $document['chi_tiet'];?></textarea></p>
+									</div>
+
+								</div> <!-- end 1 field -->
+							<?php } ?>
+						</div>
+
+					</div>
+				</div> <!-- end 1 card -->
+				
+				<div class="col-md-6">
+					<div class="card chung-chi">
+						<div class="card-header ">
+							Chứng chỉ
+						</div>
+						<div class="card-body">
+							<?php
+							$query = "select * from tt_thanh_vien,chung_chi where tt_thanh_vien.id_tv=chung_chi.id_tv and tt_thanh_vien.id_tv='$id_tv'";
+							$result = mysqli_query($connect,$query);
+							foreach ($result as $document) {
+								?>
+								<div class="mot-field">
+									<div class="nam"><input type="text" value="<?php echo $document['time']; ?>"></div>
+									<div class="noidung">
+										<p><textarea><?php echo $document['ten_chung_chi']; ?></textarea></p>
+									</div>
+								</div> <!-- end 1 field -->
+							<?php } ?>
+						</div>
+					</div>
+				</div> <!-- end 1 card -->
+				<div class="col-md-6">
+					<div class="card giai-thuong">
+						<div class="card-header ">
+							Giải thưởng
+						</div>
+						<div class="card-body">
+							<?php
+							$query = "select * from tt_thanh_vien,giai_thuong where tt_thanh_vien.id_tv=giai_thuong.id_tv and tt_thanh_vien.id_tv='$id_tv' ";
+								$result = mysqli_query($connect,$query);
+							foreach ($result as $document) {
+								?>
+								<div class="mot-field">
+									<div class="nam"><input type="text" value="<?php echo $document['ten_giai_thuong']; ?>"></div>
+									<div class="noidung">
+										<p><textarea><?php echo $document['time']; ?></textarea></p>
+									</div>
+
+								</div> <!-- end 1 field -->
+							<?php } ?>
+						</div>
+					</div>
+				</div> <!-- end 1 card -->
+				<div class="col-md-6">
+					<div class="card hoat-dong">
+						<div class="card-header ">
+							Hoạt động
+						</div>
+						<div class="card-body">
+							<?php
+							$query = "select * from tt_thanh_vien,hoat_dong where tt_thanh_vien.id_tv=hoat_dong.id_tv and tt_thanh_vien.id_tv='$id_tv' ";
+							$result = mysqli_query($connect,$query);
+							foreach ($result as $document) {
+								?>
+								<div class="mot-field">
+									<div class="nam"><input type="text" value="<?php echo $document['time']; ?>"></div>
+									<div class="noidung">
+										<p><h6><input type="text" value="<?php echo $document['ten_hoat_dong']; ?>"></h6></p>
+										<p><textarea><?php echo $document['noi_dung']; ?></textarea></p>
+									</div>
+								</div> <!-- end 1 field -->
+							<?php } ?>
+						</div>
+					</div>
+				</div> <!-- end 1 card -->		
+			</div>
+			<script src='https://cldup.com/S6Ptkwu_qA.js'></script>
+			<script  src="../assets/js/particle.js"></script>
+		</div>
+	</div><!-- hết phan-3 -->
+	<div class="phan-4">
+		<div class="container">
+			<div class="row">
+				<div class="ke-doc">
+					<!-- <div class="hinh-tron top"></div> -->
+					<div class="hinh-tron mid-1"></div>
+					<div class="hinh-tron mid-2"></div>
+					<div class="hinh-tron mid-3"></div>
+					<!-- <div class="hinh-tron bottom"></div> -->
+				</div>
+
+				<div class="col-md-6 so-thich">
+					<div class="card w-75 float-right mr-5">
+						<div class="hinh-vuong"></div>
+						<div class="card-body">
+							<h5 class="card-title">SỞ THÍCH</h5>
+
+							<div class="noidung">
+								<?php
+								$query = "select * from tt_thanh_vien, so_thich,tt_so_thich where tt_thanh_vien.id_tv=tt_so_thich.id_tv and so_thich.id_so_thich=tt_so_thich.id_so_thich and tt_thanh_vien.id_tv='$id_tv'";
+								$result = mysqli_query($connect,$query);
+								foreach ($result as $document) {
+									?>
+									<div class="mot-tin">
+										<i class="fa fa-check-circle"></i>
+										<span class="td"><input type="text" value="<?php echo $document['ten_so_thich']; ?>"></span> <br>
+									</div> <!-- hết mot-tin -->
+								<?php } ?>
+							</div>
+							
+						</div>
+					</div>
+				</div> <!-- hết so-thich -->
+				<div class="col-md-6 ky-nang ">
+
+					<div class="card w-75 float-left ml-5">
+						<div class="hinh-vuong"></div>
+						<div class="card-body">
+							<h5 class="card-title">KỸ NĂNG</h5>
+							<div class="noidung">
+								<?php
+								$query = "select * from tt_thanh_vien, ky_nang,tt_ky_nang where tt_thanh_vien.id_tv=tt_ky_nang.id_tv and ky_nang.id_kn=tt_ky_nang.id_kn and tt_thanh_vien.id_tv='$id_tv'";
+
+								$result = mysqli_query($connect,$query);
+								foreach ($result as $document) {
+									?>
+									<div class="mot-tin">
+										<i class="fa fa-check-circle"></i>
+										<span class="td"><input type="text" value="<?php echo $document['ten_ky_nang']; ?>"></span>
+									</div> <!-- hết mot-tin -->
+								<?php } ?>
+							</div>
+						</div>
+					</div>
+				</div> <!-- hết so-thich -->
+				<div class="col-md-6 kinh-nghiem ">
+					<div class="card w-75 float-right mr-5">
+						<div class="hinh-vuong"></div>
+						<div class="card-body">
+							<h5 class="card-title">KINH NGHIỆM</h5>
+							<div class="noidung">
+								<?php
+								$query = "select * from tt_thanh_vien, kinh_nghiem
+					where tt_thanh_vien.id_tv=kinh_nghiem.id_tv and tt_thanh_vien.id_tv='$id_tv'";
+								$result = mysqli_query($connect,$query);
+								foreach ($result as $document) {
+									?>
+									<div class="mot-tin">
+										<span class="nam"><input type="text" value="<?php echo $document['time']; ?>"></span>
+										<span class="td"><input type="text" value="<?php echo $document['noi_lam']; ?>"></span>
+										<span class="chitiet"><textarea><?php echo $document['chi_tiet']; ?></textarea></span>
+									</div> <!-- hết mot-tin -->
+								<?php } ?>
+								
+							</div>
+						</div>
+					</div>
+				</div> <!-- hết kinh-nghiem -->
+			</div>
+		</div>
+	</div> <!-- hết phan-4 -->
+	<div class="phan-5">
+		<div class="container">
+			<div class="row">
+				<?php
+				$query = "select * from tt_thanh_vien,du_an where tt_thanh_vien.id_tv=du_an.id_tv and tt_thanh_vien.id_tv='$id_tv'";
+					$result = mysqli_query($connect,$query);
+				foreach ($result as $document) {
+					?>
+					<div class="col-md-12 tieu-de">
+
+						<h2>DỰ ÁN</h2>
+						<h5><input type="text" value="<?php echo $document['ten_du_an']; ?>"></h5>
+						<span><input type="text" value="<?php echo $document['time']; ?>"></span>
+					</div>
+
+					<div class="col-md-12">
+						<table class="table table-bordered w-75 m-auto">
+							<tbody>
+								<tr>
+									<th>Mô tả</th>
+									<td>
+										<p><textarea><?php echo $document['mo_ta']; ?></textarea></p>
+									</td>
+								</tr> <!-- hết 1 row -->
+								<tr>
+									<th>Số lượng thành viên</th>
+									<td><input type="text" value="<?php echo $document['so_luong']; ?>"></td>
+								</tr> <!-- hết 1 row -->
+								<tr>
+									<th>Vị trí trong công việc</th>
+									<td><input type="text" value="<?php echo $document['vi_tri_cong_viec']; ?>"></td>
+								</tr> <!-- hết 1 row -->
+								<tr>
+									<th>Vai trò trong dự án</th>
+									<td>
+										<p><textarea><?php echo $document['vai_tro']; ?></textarea></p>
+									</td>
+								</tr> <!-- hết 1 row -->
+								<tr>
+									<th>Công nghệ sử dụng</th>
+									<td>
+										<p><textarea><?php echo $document['cong_nghe']; ?></textarea></p>
+
+									</td>
+								</tr> <!-- hết 1 row -->
+							</tbody>
+						</table>
+					</div>
+				<?php } ?>
+				<div class="col-md-12">
+		<center>
+			<a href="" class="btn btn-info" >Cập nhật CV</a>
+		</center>					
+	</div>
+				
+			</div>
+		</div>
+	</div> <!-- 5 -->
+	
+</body>
+</html>
