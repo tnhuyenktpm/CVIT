@@ -2106,6 +2106,9 @@ center a.btn {
         .clickform.clickdktd .dn {
             height: 480px;
         }
+        .clickform.clickdktd .dn {
+            height: 618px;
+        }
 
         .clickform.clickdktv .dn {
             height: auto !important;
@@ -2300,4 +2303,35 @@ span.name-cv, span.name-ntd {
     top: 50%;
     right: 24px;
     margin-top: -19px;
+}
+.avatar-ntd .khung-anh {
+    padding: 5px;
+    border: 1px solid #f1f1f1;
+    position: relative;
+    text-align: center;
+}
+.info-ntd a.btn.btn-primary.button.btn-block {
+    padding: 6px 16px;
+    width: 160px;
+    margin-top: 16px;
+}
+.info-ntd a.btn.btn-primary.button.btn-block i {
+    margin-right: 5px;
+}
+.clickform.editinfontd.clickhien {
+    width: 60%;
+    margin-left: -30%;
+}
+.editinfontd .dn.dk {
+    width: 96%;
+}
+.editinfontd .dn form {
+    width: unset;
+}
+.editinfontd h3 {
+    padding-bottom: 15px;
+}
+.info-ntd input.form-control {
+    border-radius: 20px;
+    padding-left: 24px;
 }
