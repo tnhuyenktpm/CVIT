@@ -560,9 +560,9 @@ p.about a {
     color: #036166;
 }
 .chuyen-nganh .chitiet {
-   padding-top: 30px;
-   padding-right: 30px;
-   padding-left: 30px;
+ padding-top: 30px;
+ padding-right: 30px;
+ padding-left: 30px;
 }
 .tieude-cn {
     margin-top: 50px;
@@ -1293,12 +1293,12 @@ center a.btn i {
     margin-left: 5px;
 }
 span.edit-sothich.edit-colortext .color {
- display: inline-block;
- width: 30px;
- height: 20px;
- border-radius: 5px;
- background-color: #fff;
- border: 1px solid #ffffff73;
+   display: inline-block;
+   width: 30px;
+   height: 20px;
+   border-radius: 5px;
+   background-color: #fff;
+   border: 1px solid #ffffff73;
 }
 span.edit-sothich.edit-colortext span.td {
     margin-right: 10px;
@@ -1699,9 +1699,9 @@ header.trangtk .info img {
     /* end Responsive trang-cv*/
     /* Responsive footer*/
     .footer-top .col-md-3 {
-       padding-bottom: 30px; 
-   }
-   .footer-bottom span {
+     padding-bottom: 30px; 
+ }
+ .footer-bottom span {
     padding: 0px;
 }
 center a.btn {
@@ -2334,4 +2334,17 @@ span.name-cv, span.name-ntd {
 .info-ntd input.form-control {
     border-radius: 20px;
     padding-left: 24px;
+}
+center a.btn {
+    border: 1px solid;
+    border-radius: 25px;
+    padding-right: 16px;
+    padding-left: 12px;
+    font-size: 14px;
+}
+
+center a.btn i {
+    margin-right: 8px !important;
+    font-size: 18px !important;
+    margin-left: 0px !important;
 }
